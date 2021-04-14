@@ -1,0 +1,139 @@
+version: "3"
+
+services:
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - '80:80'
+      - '443:443'
+#    restart: always
+    environment:
+      # Basic Auth
+      #  DOMAINS: 'username:password@example.com -> <upstream>'
+      # Multiple Domain
+      #   DOMAINS: 'wordpress.example.com -> http://wordpress:80, gitlab.example.com
+      #       -> http://gitlab'
+      DOMAINS: 'test.example.fqdn -> http://php-apache_1,
+        wp-test.example.fqdn -> http://wordpress-app_1'
+      #STAGE: production  # 本番用、Let's encryptが動作する。コメントアウトのみではオレオレ証明書にならないのでlocalにする
+      #STAGE: local  # テスト用。オレオレ証明書
+    volumes:
+      - https-portal-data:/var/lib/https-portal
+    networks:
+      - nginx_proxy_net
+    depends_on:
+      - php-apache_1  # 追加
+      - wordpress-app_1
+     
+
+#########################################################
+  php-apache_1:
+    build:
+      context: ./docker-lamp/php-apache
+      args:
+        - DOCKER_LOCATION=Asia/Tokyo  # timezone, セットしない場合はUTC、/usr/share/zoneinfo/内のディレクトリ構造に一致する値
+    image: tadaoji/php-apache
+    volumes:
+      - ./lamp_1/public_html:/var/www/html  # 書き換え
+      - ./lamp_1/apache_logs:/opt/logs  # 書き換え
+    environment:
+      APACHE_LOG_DIR: '/opt/logs'
+    restart: always
+    networks:
+      - nginx_proxy_net
+    depends_on:
+      - mysql-db_1  # 書き換え
+
+# ------------------------------------
+  mysql-db_1:
+    build:
+      context: ./docker-lamp/mysql
+      args:
+        - DOCKER_LOCATION=Asia/Tokyo  # timezone, セットしない場合はUTC、/usr/share/zoneinfo/内のディレクトリ構造に一致する値
+        - MYSQL_ROOT_PASSWORD=myrootpassword
+    image: tadaoji/mysql
+    volumes:
+      - mysql_db_volume_1:/var/lib/mysql  # 書き換え
+      #- ./lamp_1/mysql_logs:/var/log/mysql  # 要7x7パーミッション、無いとPermission Deniedをmysqlが吐いてコンテナが停止する
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: myrootpassword
+      MYSQL_DATABASE: wordpressdb
+      MYSQL_USER: wordpressuser
+      MYSQL_PASSWORD: wordpresspass
+    networks:
+      - nginx_proxy_net
+
+#########################################################
+  wordpress-app_1:
+    image: wordpress:latest
+    restart: always
+    #volumes:
+    #  - ./wordpress_1/public_html:/var/www/html
+    networks:
+      - nginx_proxy_net
+    depends_on:
+      - mysql-db_wp1
+    environment:
+      WORDPRESS_DB_HOST: mysql-db_wp1
+      WORDPRESS_DB_NAME: wordpressdb
+      WORDPRESS_DB_USER: wordpressuser
+      WORDPRESS_DB_PASSWORD: wordpresspass
+
+# ------------------------------------
+  mysql-db_wp1:
+    build:
+      context: ./docker-lamp/mysql
+      args:
+        - DOCKER_LOCATION=Asia/Tokyo  # timezone, セットしない場合はUTC、/usr/share/zoneinfo/内のディレクトリ構造に一致する値
+        - MYSQL_ROOT_PASSWORD=myrootpassword
+    image: tadaoji/mysql
+    volumes:
+      - mysql_db_volume_wp1:/var/lib/mysql  # 書き換え
+      #- ./wordpress_1/mysql_logs:/var/log/mysql  # 要7x7パーミッション、無いとPermission Deniedをmysqlが吐いてコンテナが停止する
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: myrootpassword
+      MYSQL_DATABASE: wordpressdb
+      MYSQL_USER: wordpressuser
+      MYSQL_PASSWORD: wordpresspass
+    networks:
+      - nginx_proxy_net
+
+#########################################################
+  https-portal-phpmyadmin:
+    image: steveltn/https-portal:1
+    ports:
+      - '28249:443'
+#    restart: always
+    environment:
+      DOMAINS: 'pypmyadmin.example.fqdn -> http://phpmyadmin'
+      #STAGE: production  # 本番用、Let's encryptが動作する
+      STAGE: local  # 80,443両方閉じているのでlet's encryptは通らない。よってオレオレ証明書で運用する # テスト用。オレオレ証明書
+    volumes:
+      - https-portal-data-pypmyadmin:/var/lib/https-portal
+    networks:
+      - nginx_proxy_net
+    depends_on:
+      - phpmyadmin
+
+  phpmyadmin:
+    image: phpmyadmin
+    restart: always
+    environment:
+      PMA_ARBITRARY: 1  # ログイン画面で任意のサーバを選べる
+#      PMA_HOST: mysql-db_1  # 特定のサーバに予め接続した状態になる
+    networks:
+      - nginx_proxy_net
+
+
+#########################################################
+volumes:
+  https-portal-data:
+  https-portal-data-pypmyadmin:
+  mysql_db_volume_1:  # 追加
+  mysql_db_volume_wp1:
+
+#########################################################
+networks:
+  nginx_proxy_net:
