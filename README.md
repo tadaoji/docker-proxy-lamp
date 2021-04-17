@@ -136,6 +136,9 @@ If you use the volume option of docker to allow the host to handle the log file,
 
 # Credits
 [https-portal by SteveLTN](https://github.com/SteveLTN)
+
 [phpmyadmin by Docker Official Images](https://hub.docker.com/_/phpmyadmin)
+
 [php by Docker Official Images](https://hub.docker.com/_/php)
+
 [mysql by Docker Official Images](https://hub.docker.com/_/mysql)
