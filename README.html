@@ -1,0 +1,1253 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>[ENG] README.md: docker-proxy-lamp</title>
+    <style source-path="global-text-editor-styles">.mde-cm-wrapper .CodeMirror {
+      font-size: 13px;
+      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+      font-weight: normal;
+      line-height: 1.5;
+    }
+    .mde-preview pre code {
+      font-family: SFMono-Regular,Consolas,Liberation Mono,Menlo,Courier,monospace;
+    }</style><style source-path="global-preview-styles">.mde-preview {
+      font-size: 15px
+    }</style><style source-path="/Users/kona/Library/Application Support/inkdrop/packages/admonition/styles/admonition.less" priority="0">.admonition {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+}
+.admonition > summary {
+  cursor: pointer;
+}
+.admonition > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-icon,
+.admonition-note > .custom-block-heading:before,
+.admonition-info > .custom-block-heading:before,
+.admonition-danger > .custom-block-heading:before,
+.admonition-warning > .custom-block-heading:before,
+.admonition-success > .custom-block-heading:before,
+.admonition-fail > .custom-block-heading:before,
+.admonition-question > .custom-block-heading:before,
+.admonition-abstract > .custom-block-heading:before,
+.admonition-example > .custom-block-heading:before {
+  position: absolute;
+  left: 1.2rem;
+  font-family: "FontAwesome";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 24px;
+  width: 24px;
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  text-align: center;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+  /* Support for Firefox. */
+  -moz-osx-font-smoothing: grayscale;
+  /* Support for IE. */
+  font-feature-settings: 'liga';
+}
+.admonition-title,
+.admonition-note > .custom-block-heading,
+.admonition-info > .custom-block-heading,
+.admonition-danger > .custom-block-heading,
+.admonition-warning > .custom-block-heading,
+.admonition-success > .custom-block-heading,
+.admonition-fail > .custom-block-heading,
+.admonition-question > .custom-block-heading,
+.admonition-abstract > .custom-block-heading,
+.admonition-example > .custom-block-heading,
+.admonition-spoiler > .custom-block-heading {
+  margin: 0 -1.2rem;
+  padding: .8rem 1.2rem .8rem 4rem;
+  border-bottom: 0.1rem solid rgba(68, 138, 255, 0.1);
+  background-color: rgba(68, 138, 255, 0.1);
+  font-weight: 700;
+}
+.admonition-note {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #448aff;
+}
+.admonition-note > summary {
+  cursor: pointer;
+}
+.admonition-note > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-note > .custom-block-heading {
+  background-color: rgba(68, 138, 255, 0.1);
+}
+.admonition-note > .custom-block-heading:before {
+  color: #448aff;
+  content: "\f249";
+}
+.admonition-info {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #009688;
+}
+.admonition-info > summary {
+  cursor: pointer;
+}
+.admonition-info > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-info > .custom-block-heading {
+  background-color: rgba(0, 150, 136, 0.1);
+}
+.admonition-info > .custom-block-heading:before {
+  color: #009688;
+  content: "\f05a";
+}
+.admonition-danger {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #c2185b;
+}
+.admonition-danger > summary {
+  cursor: pointer;
+}
+.admonition-danger > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-danger > .custom-block-heading {
+  background-color: rgba(194, 24, 91, 0.1);
+}
+.admonition-danger > .custom-block-heading:before {
+  color: #c2185b;
+  content: "\f0e7";
+}
+.admonition-warning {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #ff9100;
+}
+.admonition-warning > summary {
+  cursor: pointer;
+}
+.admonition-warning > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-warning > .custom-block-heading {
+  background-color: rgba(255, 145, 0, 0.1);
+}
+.admonition-warning > .custom-block-heading:before {
+  color: #ff9100;
+  content: "\f071";
+}
+.admonition-success {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #00c853;
+}
+.admonition-success > summary {
+  cursor: pointer;
+}
+.admonition-success > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-success > .custom-block-heading {
+  background-color: rgba(0, 200, 83, 0.1);
+}
+.admonition-success > .custom-block-heading:before {
+  color: #00c853;
+  content: "\f00c";
+}
+.admonition-fail {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #d32f2f;
+}
+.admonition-fail > summary {
+  cursor: pointer;
+}
+.admonition-fail > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-fail > .custom-block-heading {
+  background-color: rgba(211, 47, 47, 0.1);
+}
+.admonition-fail > .custom-block-heading:before {
+  color: #d32f2f;
+  content: "\f00d";
+}
+.admonition-question {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #64dd17;
+}
+.admonition-question > summary {
+  cursor: pointer;
+}
+.admonition-question > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-question > .custom-block-heading {
+  background-color: rgba(100, 221, 23, 0.1);
+}
+.admonition-question > .custom-block-heading:before {
+  color: #64dd17;
+  content: "\f059";
+}
+.admonition-abstract {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #00b0ff;
+}
+.admonition-abstract > summary {
+  cursor: pointer;
+}
+.admonition-abstract > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-abstract > .custom-block-heading {
+  background-color: rgba(0, 176, 255, 0.1);
+}
+.admonition-abstract > .custom-block-heading:before {
+  color: #00b0ff;
+  content: "\f02d";
+}
+.admonition-example {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #651fff;
+}
+.admonition-example > summary {
+  cursor: pointer;
+}
+.admonition-example > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-example > .custom-block-heading {
+  background-color: rgba(101, 31, 255, 0.1);
+}
+.admonition-example > .custom-block-heading:before {
+  color: #651fff;
+  content: "\f0cb";
+}
+.admonition-spoiler {
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
+  position: relative;
+  margin: 1.5625em 0;
+  padding: 0 1.2rem;
+  border-left: .4rem solid #448aff;
+  border-radius: .2rem;
+  overflow: auto;
+  border-left-color: #455a64;
+}
+.admonition-spoiler > summary {
+  cursor: pointer;
+}
+.admonition-spoiler > .custom-block-body {
+  margin: 1em 0;
+}
+.admonition-spoiler > .custom-block-heading {
+  padding-left: 1rem;
+  background-color: rgba(69, 90, 100, 0.1);
+}
+</style><style source-path="/Users/kona/Library/Application Support/inkdrop/packages/hovering-expansion-image/styles/main.less" priority="0">.editor img.inline-widget,
+.mde-preview img {
+  width: 400px;
+  transition: 0.2s;
+}
+.editor img.inline-widget:hover,
+.mde-preview img:hover {
+  transform: scale(2) translateX(105px);
+}
+.mde-cm-wrapper .CodeMirror .CodeMirror-linewidget {
+  overflow: visible;
+  z-index: 100;
+}
+</style><style source-path="/Users/kona/Library/Application Support/inkdrop/packages/img-small/styles/img-small.less" priority="0">.editor img.inline-widget,
+.mde-preview img {
+  max-height: 240px;
+}
+</style><style source-path="/Users/kona/Library/Application Support/inkdrop/packages/sequence-diagrams/styles/sequence-diagrams.less" priority="0">.mde-preview.print .sequence-diagram svg {
+  max-width: 100%;
+}
+body[class*="dark-ui"] .mde-preview .sequence-diagram svg {
+  background: rgba(255, 255, 255, 0.7);
+}
+</style><style source-path="/Applications/Inkdrop.app/Contents/Resources/app.asar/node_modules/github-preview/styles/github-markdown.css" context="inkdrop-preview" priority="1">@font-face {
+  font-family: octicons-anchor;
+  src: url(data:font/woff;charset=utf-8;base64,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) format('woff');
+}
+.mde-preview {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  color: #333;
+  font-family: "Helvetica Neue", Helvetica, "Segoe UI", Arial, freesans, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  line-height: 1.6;
+  word-wrap: break-word;
+}
+.mde-preview:before {
+  display: table;
+  content: "";
+}
+.mde-preview:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.mde-preview a {
+  background-color: transparent;
+}
+.mde-preview a:active,
+.mde-preview a:hover {
+  outline: 0;
+}
+.mde-preview strong {
+  font-weight: bold;
+  color: black;
+}
+.mde-preview em {
+  color: black;
+}
+.mde-preview h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+.mde-preview img {
+  border: 0;
+}
+.mde-preview hr {
+  box-sizing: content-box;
+  height: 0;
+}
+.mde-preview pre {
+  overflow: auto;
+}
+.mde-preview code,
+.mde-preview kbd,
+.mde-preview pre {
+  font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, Courier, monospace;
+  font-size: 1em;
+}
+.mde-preview input {
+  color: inherit;
+  font: inherit;
+  margin: 0;
+}
+.mde-preview html input[disabled] {
+  cursor: default;
+}
+.mde-preview input {
+  line-height: normal;
+}
+.mde-preview input[type="checkbox"] {
+  box-sizing: border-box;
+  padding: 0;
+}
+.mde-preview table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+.mde-preview td,
+.mde-preview th {
+  padding: 0;
+}
+.mde-preview * {
+  box-sizing: border-box;
+}
+.mde-preview input {
+  font: 13px / 1.4 Helvetica, arial, nimbussansl, liberationsans, freesans, clean, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+.mde-preview a {
+  color: #4078c0;
+  text-decoration: none;
+}
+.mde-preview a:hover,
+.mde-preview a:active {
+  text-decoration: underline;
+}
+.mde-preview hr {
+  height: 0;
+  margin: 15px 0;
+  overflow: hidden;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #ddd;
+}
+.mde-preview hr:before {
+  display: table;
+  content: "";
+}
+.mde-preview hr:after {
+  display: table;
+  clear: both;
+  content: "";
+}
+.mde-preview h1,
+.mde-preview h2,
+.mde-preview h3,
+.mde-preview h4,
+.mde-preview h5,
+.mde-preview h6 {
+  margin-top: 0;
+  padding-top: 15px;
+  margin-bottom: 15px;
+  line-height: 1.1;
+}
+.mde-preview h1 {
+  font-size: 30px;
+}
+.mde-preview h2 {
+  font-size: 21px;
+}
+.mde-preview h3 {
+  font-size: 16px;
+}
+.mde-preview h4 {
+  font-size: 14px;
+}
+.mde-preview h5 {
+  font-size: 12px;
+}
+.mde-preview h6 {
+  font-size: 11px;
+}
+.mde-preview blockquote {
+  margin: 0;
+}
+.mde-preview ul,
+.mde-preview ol {
+  padding: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.mde-preview ol ol,
+.mde-preview ul ol {
+  list-style-type: lower-roman;
+}
+.mde-preview ul ul ol,
+.mde-preview ul ol ol,
+.mde-preview ol ul ol,
+.mde-preview ol ol ol {
+  list-style-type: lower-alpha;
+}
+.mde-preview dd {
+  margin-left: 0;
+}
+.mde-preview code {
+  font-size: 12px;
+}
+.mde-preview pre {
+  margin-top: 0;
+  margin-bottom: 0;
+  font-size: 12px;
+}
+.mde-preview .select::-ms-expand {
+  opacity: 0;
+}
+.mde-preview .octicon {
+  font: normal normal normal 16px/1 octicons-anchor;
+  display: inline-block;
+  text-decoration: none;
+  text-rendering: auto;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.mde-preview .octicon-link:before {
+  content: '\f05c';
+}
+.mde-preview .mde-preview > *:first-child {
+  margin-top: 0 !important;
+}
+.mde-preview .mde-preview > *:last-child {
+  margin-bottom: 0 !important;
+}
+.mde-preview a:not([href]) {
+  color: inherit;
+  text-decoration: none;
+}
+.mde-preview .anchor {
+  display: inline-block;
+  padding-right: 2px;
+  margin-left: -18px;
+}
+.mde-preview .anchor:focus {
+  outline: none;
+}
+.mde-preview h1 .octicon-link,
+.mde-preview h2 .octicon-link,
+.mde-preview h3 .octicon-link,
+.mde-preview h4 .octicon-link,
+.mde-preview h5 .octicon-link,
+.mde-preview h6 .octicon-link {
+  color: #000;
+  vertical-align: middle;
+  visibility: hidden;
+}
+.mde-preview h1:hover .anchor,
+.mde-preview h2:hover .anchor,
+.mde-preview h3:hover .anchor,
+.mde-preview h4:hover .anchor,
+.mde-preview h5:hover .anchor,
+.mde-preview h6:hover .anchor {
+  text-decoration: none;
+}
+.mde-preview h1:hover .anchor .octicon-link,
+.mde-preview h2:hover .anchor .octicon-link,
+.mde-preview h3:hover .anchor .octicon-link,
+.mde-preview h4:hover .anchor .octicon-link,
+.mde-preview h5:hover .anchor .octicon-link,
+.mde-preview h6:hover .anchor .octicon-link {
+  visibility: visible;
+}
+.mde-preview h1 {
+  padding-bottom: 0.3em;
+  font-size: 2.25em;
+  line-height: 1.2;
+  border-bottom: 1px solid #eee;
+}
+.mde-preview h1 .anchor {
+  line-height: 1;
+}
+.mde-preview h2 {
+  padding-bottom: 0.3em;
+  font-size: 1.75em;
+  line-height: 1.225;
+  border-bottom: 1px solid #eee;
+}
+.mde-preview h2 .anchor {
+  line-height: 1;
+}
+.mde-preview h3 {
+  font-size: 1.5em;
+  line-height: 1.43;
+}
+.mde-preview h3 .anchor {
+  line-height: 1.2;
+}
+.mde-preview h4 {
+  font-size: 1.25em;
+}
+.mde-preview h4 .anchor {
+  line-height: 1.2;
+}
+.mde-preview h5 {
+  font-size: 1em;
+}
+.mde-preview h5 .anchor {
+  line-height: 1.1;
+}
+.mde-preview h6 {
+  font-size: 1em;
+  color: #777;
+}
+.mde-preview h6 .anchor {
+  line-height: 1.1;
+}
+.mde-preview p,
+.mde-preview blockquote,
+.mde-preview ul,
+.mde-preview ol,
+.mde-preview dl,
+.mde-preview table,
+.mde-preview pre {
+  margin-top: 0;
+  margin-bottom: 16px;
+}
+.mde-preview hr {
+  height: 4px;
+  padding: 0;
+  margin: 16px 0;
+  background-color: #e7e7e7;
+  border: 0 none;
+}
+.mde-preview ul,
+.mde-preview ol {
+  padding-left: 2em;
+}
+.mde-preview ul ul,
+.mde-preview ul ol,
+.mde-preview ol ol,
+.mde-preview ol ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+.mde-preview li > p {
+  margin: 0;
+}
+.mde-preview dl {
+  padding: 0;
+}
+.mde-preview dl dt {
+  padding: 0;
+  margin-top: 16px;
+  font-size: 1em;
+  font-style: italic;
+  font-weight: bold;
+}
+.mde-preview dl dd {
+  padding: 0 16px;
+  margin-bottom: 16px;
+}
+.mde-preview blockquote {
+  padding: 0 15px;
+  color: #777;
+  border-left: 4px solid #ddd;
+}
+.mde-preview blockquote > :first-child {
+  margin-top: 0;
+}
+.mde-preview blockquote > :last-child {
+  margin-bottom: 0;
+}
+.mde-preview table {
+  display: block;
+  width: 100%;
+  overflow: auto;
+  word-break: keep-all;
+}
+.mde-preview table th {
+  font-weight: bold;
+}
+.mde-preview table th,
+.mde-preview table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+.mde-preview table tr {
+  background-color: #fff;
+  border-top: 1px solid #ccc;
+}
+.mde-preview table tr:nth-child(2n) {
+  background-color: #f8f8f8;
+}
+.mde-preview img {
+  max-width: 100%;
+  box-sizing: content-box;
+  background-color: #fff;
+}
+.mde-preview code {
+  padding: 0;
+  padding-top: 0.2em;
+  padding-bottom: 0.2em;
+  margin: 0;
+  font-size: 85%;
+  background-color: rgba(0, 0, 0, 0.04);
+  border-radius: 3px;
+}
+.mde-preview code:before,
+.mde-preview code:after {
+  letter-spacing: -0.2em;
+  content: "\00a0";
+}
+.mde-preview pre > code {
+  padding: 0;
+  margin: 0;
+  font-size: 100%;
+  word-break: normal;
+  white-space: pre;
+  background: transparent;
+  border: 0;
+}
+.mde-preview pre {
+  padding: 16px;
+  overflow: auto;
+  word-wrap: normal;
+  font-size: 85%;
+  line-height: 1.45;
+  background-color: #f7f7f7;
+  border-radius: 3px;
+}
+.mde-preview pre code {
+  display: inline;
+  max-width: initial;
+  padding: 0;
+  margin: 0;
+  overflow: initial;
+  line-height: inherit;
+  word-wrap: normal;
+  background-color: transparent;
+  border: 0;
+}
+.mde-preview pre code:before,
+.mde-preview pre code:after {
+  content: normal;
+}
+.mde-preview kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font-size: 11px;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+.mde-preview .cm-header {
+  color: blue;
+}
+.mde-preview .cm-quote {
+  color: #090;
+  font-style: italic;
+}
+.mde-preview .cm-negative {
+  color: #d44;
+}
+.mde-preview .cm-positive {
+  color: #292;
+}
+.mde-preview .cm-header,
+.mde-preview .cm-strong {
+  font-weight: bold;
+}
+.mde-preview .cm-em {
+  font-style: italic;
+}
+.mde-preview .cm-link {
+  text-decoration: underline;
+}
+.mde-preview .cm-strikethrough {
+  text-decoration: line-through;
+}
+.mde-preview .cm-keyword {
+  color: #333;
+  font-weight: bold;
+}
+.mde-preview .cm-atom {
+  color: #219;
+}
+.mde-preview .cm-number {
+  color: #164;
+}
+.mde-preview .cm-def {
+  color: #00f;
+}
+.mde-preview .cm-property {
+  color: #00c;
+}
+.mde-preview .cm-operator {
+  color: #708;
+}
+.mde-preview .cm-variable-2 {
+  color: #05a;
+}
+.mde-preview .cm-variable-3,
+.mde-preview .cm-s-default .cm-type {
+  color: #085;
+}
+.mde-preview .cm-comment {
+  color: #a50;
+  font-style: italic;
+}
+.mde-preview .cm-string {
+  color: #a11;
+}
+.mde-preview .cm-string-2 {
+  color: #f50;
+}
+.mde-preview .cm-meta {
+  color: #555;
+}
+.mde-preview .cm-qualifier {
+  color: #555;
+}
+.mde-preview .cm-builtin {
+  color: #30a;
+}
+.mde-preview .cm-bracket {
+  color: #997;
+}
+.mde-preview .cm-tag {
+  color: #170;
+}
+.mde-preview .cm-attribute {
+  color: #00c;
+}
+.mde-preview .cm-hr {
+  color: #999;
+}
+.mde-preview .cm-link {
+  color: #00c;
+}
+.mde-preview .cm-error {
+  color: #f00;
+}
+.mde-preview kbd {
+  display: inline-block;
+  padding: 3px 5px;
+  font: 11px Consolas, "Liberation Mono", Menlo, Courier, monospace;
+  line-height: 10px;
+  color: #555;
+  vertical-align: middle;
+  background-color: #fcfcfc;
+  border: solid 1px #ccc;
+  border-bottom-color: #bbb;
+  border-radius: 3px;
+  box-shadow: inset 0 -1px 0 #bbb;
+}
+.mde-preview .task-list-item {
+  list-style-type: none;
+}
+.mde-preview .task-list-item + .task-list-item {
+  margin-top: 0px;
+}
+.mde-preview .task-list-item input {
+  /* margin: 0 0.35em 0.25em -1.6em; */
+  vertical-align: middle;
+}
+.mde-preview :checked + .radio-label {
+  z-index: 1;
+  position: relative;
+  border-color: #4078c0;
+}
+@media print {
+  .mde-preview table {
+    overflow: hidden;
+    word-break: break-word;
+  }
+  .mde-preview pre > code {
+    word-wrap: break-word;
+    white-space: pre-wrap;
+  }
+}
+</style><style source-path="/Applications/Inkdrop.app/Contents/Resources/app.asar/node_modules/github-preview/styles/github-markdown-dark.css" context="inkdrop-preview" priority="1">body[class*="dark-ui"] .mde-preview {
+  color: rgba(255, 255, 255, 0.7);
+}
+body[class*="dark-ui"] .mde-preview a {
+  background-color: transparent;
+}
+body[class*="dark-ui"] .mde-preview img {
+  border: 0;
+}
+body[class*="dark-ui"] .mde-preview input {
+  color: inherit;
+}
+body[class*="dark-ui"] .mde-preview a {
+  color: #6987AF;
+}
+body[class*="dark-ui"] .mde-preview strong,
+body[class*="dark-ui"] .mde-preview em {
+  color: white;
+}
+body[class*="dark-ui"] .mde-preview h1,
+body[class*="dark-ui"] .mde-preview h2,
+body[class*="dark-ui"] .mde-preview h3,
+body[class*="dark-ui"] .mde-preview h4,
+body[class*="dark-ui"] .mde-preview h5,
+body[class*="dark-ui"] .mde-preview h6 {
+  color: rgba(255, 255, 255, 0.875);
+}
+body[class*="dark-ui"] .mde-preview h6 {
+  color: rgba(255, 255, 255, 0.625);
+}
+body[class*="dark-ui"] .mde-preview h1,
+body[class*="dark-ui"] .mde-preview h2 {
+  border-bottom-color: rgba(255, 255, 255, 0.4);
+}
+body[class*="dark-ui"] .mde-preview hr {
+  background-color: rgba(255, 255, 255, 0.3);
+}
+body[class*="dark-ui"] .mde-preview blockquote {
+  color: rgba(255, 255, 255, 0.4);
+  border-left: 4px solid rgba(255, 255, 255, 0.1);
+}
+body[class*="dark-ui"] .mde-preview table th {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+body[class*="dark-ui"] .mde-preview table th,
+body[class*="dark-ui"] .mde-preview table td {
+  border: 1px solid rgba(255, 255, 255, 0.25);
+}
+body[class*="dark-ui"] .mde-preview table tr {
+  background-color: transparent;
+  border-top: 1px solid rgba(255, 255, 255, 0.25);
+}
+body[class*="dark-ui"] .mde-preview table tr:nth-child(2n) {
+  background-color: rgba(255, 255, 255, 0.05);
+}
+body[class*="dark-ui"] .mde-preview img {
+  background-color: transparent;
+}
+body[class*="dark-ui"] .mde-preview .highlight pre,
+body[class*="dark-ui"] .mde-preview pre {
+  background-color: rgba(0, 0, 0, 0.1);
+}
+body[class*="dark-ui"] .mde-preview .cm-header {
+  color: #ffcc66;
+}
+body[class*="dark-ui"] .mde-preview .cm-quote {
+  color: #969896;
+  font-style: italic;
+}
+body[class*="dark-ui"] .mde-preview .cm-negative {
+  color: #d44;
+}
+body[class*="dark-ui"] .mde-preview .cm-positive {
+  color: #292;
+}
+body[class*="dark-ui"] .mde-preview .cm-header,
+body[class*="dark-ui"] .mde-preview .cm-strong {
+  font-weight: bold;
+}
+body[class*="dark-ui"] .mde-preview .cm-em {
+  font-style: italic;
+}
+body[class*="dark-ui"] .mde-preview .cm-link {
+  text-decoration: underline;
+}
+body[class*="dark-ui"] .mde-preview .cm-strikethrough {
+  text-decoration: line-through;
+}
+body[class*="dark-ui"] .mde-preview .cm-keyword {
+  color: #cc99cc;
+  font-weight: normal;
+}
+body[class*="dark-ui"] .mde-preview .cm-atom {
+  color: #8abeb7;
+}
+body[class*="dark-ui"] .mde-preview .cm-number {
+  color: #f99157;
+}
+body[class*="dark-ui"] .mde-preview .cm-def {
+  color: #b5bd68;
+}
+body[class*="dark-ui"] .mde-preview .cm-property {
+  color: #b5bd68;
+}
+body[class*="dark-ui"] .mde-preview .cm-operator {
+  color: #cc99cc;
+}
+body[class*="dark-ui"] .mde-preview .cm-variable-2 {
+  color: #4A664A;
+}
+body[class*="dark-ui"] .mde-preview .cm-variable-3,
+body[class*="dark-ui"] .mde-preview .cm-type {
+  color: rgba(255, 255, 255, 0.8);
+}
+body[class*="dark-ui"] .mde-preview .cm-comment {
+  color: #969896;
+  font-style: italic;
+}
+body[class*="dark-ui"] .mde-preview .cm-string {
+  color: #8abeb7;
+}
+body[class*="dark-ui"] .mde-preview .cm-string-2 {
+  color: #8abeb7;
+}
+body[class*="dark-ui"] .mde-preview .cm-meta {
+  color: #f99157;
+}
+body[class*="dark-ui"] .mde-preview .cm-qualifier {
+  color: #555;
+}
+body[class*="dark-ui"] .mde-preview .cm-builtin {
+  color: #8abeb7;
+}
+body[class*="dark-ui"] .mde-preview .cm-bracket {
+  color: #f99157;
+}
+body[class*="dark-ui"] .mde-preview .cm-tag {
+  color: #a54543;
+}
+body[class*="dark-ui"] .mde-preview .cm-attribute {
+  color: #fda331;
+}
+body[class*="dark-ui"] .mde-preview .cm-hr {
+  color: #999;
+}
+body[class*="dark-ui"] .mde-preview .cm-link {
+  color: #f99157;
+}
+body[class*="dark-ui"] .mde-preview .cm-error {
+  color: #f00;
+}
+</style>
+  </head>
+  <body class="mde-preview">
+    <div><h1 id="eng-readmemd-docker-proxy-lamp" data-line="1" data-line-end="1">[ENG] README.md: docker-proxy-lamp</h1>
+<h1 id="readmemd-docker-proxy-lamp" data-line="3" data-line-end="3">README.md: docker-proxy-lamp</h1>
+<h1 id="toc" data-line="5" data-line-end="5">ToC</h1>
+<ul>
+<li>
+<p><a href="#overview">Overview</a></p>
+</li>
+<li>
+<p><a href="#required-environment">Required environment</a></p>
+</li>
+<li>
+<p><a href="#configuration-method">Configuration method</a></p>
+<ul>
+<li>
+<p><a href="#https-portal">https-portal</a></p>
+</li>
+<li>
+<p><a href="#restart-always">restart: always</a></p>
+<ul>
+<li>
+<p><a href="#environment">environment</a></p>
+<ul>
+<li><a href="#domains">DOMAINS</a></li>
+<li><a href="#stage">STAGE</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#depends_on">depends_on</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#lampphp-apache-mysql-db">LAMP(php-apache, mysql-db)</a></p>
+<ul>
+<li>
+<p><a href="#php-apache">php-apache</a></p>
+<ul>
+<li>
+<p><a href="#build">build</a></p>
+<ul>
+<li><a href="#args">args</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#volumes">volumes</a></p>
+</li>
+<li>
+<p><a href="#networks">networks</a></p>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#mysql-db">mysql-db</a></p>
+<ul>
+<li>
+<p><a href="#build-1">build</a></p>
+<ul>
+<li><a href="#args-1">args</a></li>
+</ul>
+</li>
+<li>
+<p><a href="#environment-1">environment</a></p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#phpmyadmin">phpmyadmin</a></p>
+<ul>
+<li>
+<p><a href="#https-portal-phpmyadmin">https-portal-phpmyadmin</a></p>
+<ul>
+<li>
+<p><a href="#ports">ports</a></p>
+</li>
+<li>
+<p><a href="#environment-2">environment</a></p>
+<ul>
+<li><a href="#stage-1">STAGE</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#phpmyadmin-1">phpmyadmin</a></p>
+<ul>
+<li><a href="#environment-3">environment</a></li>
+<li><a href="#how-to-login">How to login</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#dockerfile">Dockerfile</a></p>
+<ul>
+<li>
+<p><a href="#file-structure">File structure</a></p>
+</li>
+<li>
+<p><a href="#mysql">mysql</a></p>
+<ul>
+<li><a href="#general_log">general_log</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><a href="#credits">Credits</a></p>
+</li>
+</ul>
+<h1 id="overview" data-line="6" data-line-end="6">Overview</h1>
+<p data-line="7" data-line-end="7">Use nginx's proxy (steveltn/https-portal) to set up multiple web servers on one host. Here, we use Let's encrypt to set up an SSL-enabled LAMP configuration. By default, php-apache, mysql, wordpress, and phpmyadmin are automated and built.</p>
+<h1 id="required-environment" data-line="9" data-line-end="9">Required environment</h1>
+<p data-line="10" data-line-end="12">Linux (tested on CentOS7)<br data-line="10" data-line-end="11">
+docker-compose<br data-line="11" data-line-end="12">
+docker</p>
+<h1 id="configuration-method" data-line="14" data-line-end="14">Configuration method</h1>
+<p data-line="15" data-line-end="16">Edit docker-compose.yml<br data-line="15" data-line-end="16">
+A single coherent section is separated by ############## (comment)</p>
+<h2 id="https-portal" data-line="18" data-line-end="18">https-portal</h2>
+<p data-line="19" data-line-end="20"><a href="https://github.com/SteveLTN/https-portal" data-line="19" data-line-end="19">SteveLTN/https-portal : https://github.com/SteveLTN/https-portal</a><br data-line="19" data-line-end="20">
+using.</p>
+<h2 id="restart-always" data-line="22" data-line-end="22">restart: always</h2>
+<p data-line="23" data-line-end="24">It is recommended to comment it out when testing the behavior.<br data-line="23" data-line-end="24">
+In the case of always, SSL issue will be attempted by Let's encrypt every time when restart is continued for some reason, and it may be trapped by the SSL issue request limit of Let's encrypt.</p>
+<h3 id="environment" data-line="26" data-line-end="26">environment</h3>
+<h4 id="domains" data-line="27" data-line-end="27">DOMAINS</h4>
+<p data-line="28" data-line-end="30">Configure the proxy settings.<br data-line="28" data-line-end="29">
+The basic format is as follows.<br data-line="29" data-line-end="30">
+In this example, we will connect to two web servers (php-apache_1 and wordpress-app_1).</p>
+<pre data-line="31" data-line-end="33"><code>'test.example.fqdn -&gt; http://php-apache_1, wp-test.example.fqdn -&gt; http://wordpress-app_1'
+</code></pre>
+<p data-line="34" data-line-end="35">The web server name specification matches the service name.<br data-line="34" data-line-end="35">
+The web server name matches the service name because it is specified in the same network and DNS resolution is done by the service name.</p>
+<h4 id="stage" data-line="37" data-line-end="37">STAGE</h4>
+<p data-line="38" data-line-end="41">In the case of production, Let's encrypt will issue an SSL that can be used.<br data-line="38" data-line-end="39">
+In the case of local, it will be a self-certificate.<br data-line="39" data-line-end="40">
+For testing, local is recommended to avoid reaching the Let's encrypt limit.<br data-line="40" data-line-end="41">
+For more information, see <a href="https://github.com/SteveLTN/https-portal" data-line="41" data-line-end="41">https://github.com/SteveLTN/https-portal</a>.</p>
+<h3 id="depends_on" data-line="43" data-line-end="43">depends_on</h3>
+<p data-line="44" data-line-end="44">As SSL is issued by Let's encrypt, launch the proxy while the web server is up. It is recommended to add it here if you are going to launch any additional services.</p>
+<h2 id="lampphp-apache-mysql-db" data-line="46" data-line-end="46">LAMP(php-apache, mysql-db)</h2>
+<p data-line="47" data-line-end="49">You can create any number of LAMP servers by appending more sections to this section.<br data-line="47" data-line-end="48">
+If you want to add more, copy and rewrite the following sections to avoid duplication<br data-line="48" data-line-end="49">
+php-apache</p>
+<ul data-line="50" data-line-end="52">
+<li data-line="50" data-line-end="50">service name</li>
+<li data-line="51" data-line-end="51">volumes (host side)</li>
+<li data-line="52" data-line-end="52">depends_on</li>
+</ul>
+<p data-line="54" data-line-end="54">mysql-db</p>
+<ul data-line="55" data-line-end="57">
+<li data-line="55" data-line-end="55">service name</li>
+<li data-line="56" data-line-end="56">volumes (host side)</li>
+<li data-line="57" data-line-end="57">add volumes to be used by mysql-db in volumes section</li>
+</ul>
+<h3 id="php-apache" data-line="59" data-line-end="59">php-apache</h3>
+<p data-line="60" data-line-end="61">Using the official docker image for php<br data-line="60" data-line-end="61">
+<a href="https://hub.docker.com/_/php" data-line="61" data-line-end="61">php : https://hub.docker.com/_/php</a></p>
+<h4 id="build" data-line="63" data-line-end="63">build</h4>
+<h5 id="args" data-line="64" data-line-end="64">args</h5>
+<p data-line="65" data-line-end="66">By specifying DOCKER_LOCATION, you can set the timezone for PHP running in the container. This will match the directory structure under /usr/share/zoneinfo/ in the container being created.<br data-line="65" data-line-end="66">
+If it is not specified, it will be set to UTC.</p>
+<h4 id="volumes" data-line="68" data-line-end="68">volumes</h4>
+<p data-line="69" data-line-end="71">Set the public directory to . /lamp_1/public_html.<br data-line="69" data-line-end="70">
+Set the log directory to . /lamp_1/apache_logs.<br data-line="70" data-line-end="71">
+These can be rewritten as needed.</p>
+<h4 id="networks" data-line="73" data-line-end="73">networks</h4>
+<p data-line="74" data-line-end="74">This needs to be a common setting for all containers.</p>
+<h3 id="mysql-db" data-line="76" data-line-end="76">mysql-db</h3>
+<p data-line="77" data-line-end="77">mysql will use version 5:Latest.</p>
+<h4 id="build-1" data-line="79" data-line-end="79">build</h4>
+<h5 id="args-1" data-line="80" data-line-end="80">args</h5>
+<p data-line="81" data-line-end="82">DOCKER_LOCATION can be used to set the timezone for PHP running in the container. This will match the directory structure under /usr/share/zoneinfo/ in the container being created.<br data-line="81" data-line-end="82">
+If it is not specified, it will be set to UTC.</p>
+<p data-line="84" data-line-end="84">If MYSQL_ROOT_PASSWORD is set, /root/.my.cnf will be created in the container. This eliminates the need for a password when using the mysql command in the container.</p>
+<h4 id="environment-1" data-line="86" data-line-end="86">environment</h4>
+<p data-line="87" data-line-end="87">You can set any environment you like.</p>
+<h2 id="phpmyadmin" data-line="90" data-line-end="90">phpmyadmin</h2>
+<h3 id="https-portal-phpmyadmin" data-line="91" data-line-end="91">https-portal-phpmyadmin</h3>
+<h4 id="ports" data-line="92" data-line-end="92">ports</h4>
+<p data-line="93" data-line-end="94">Due to the nature of phpmyadmin, it is not necessary to make it available to the public, so a random port is recommended.<br data-line="93" data-line-end="94">
+In order to use only arbitrary ports, create a separate container for https-portal from the one for lamp.</p>
+<h4 id="environment-2" data-line="96" data-line-end="96">environment</h4>
+<h5 id="stage-1" data-line="97" data-line-end="97">STAGE</h5>
+<p data-line="98" data-line-end="99">Since both 80 and 443 are not used, the Let's encrypt authentication will not pass.<br data-line="98" data-line-end="99">
+Therefore, local is used as a self-certificate.</p>
+<h3 id="phpmyadmin-1" data-line="101" data-line-end="101">phpmyadmin</h3>
+<p data-line="102" data-line-end="103"><a href="https://hub.docker.com/r/phpmyadmin/phpmyadmin/" data-line="102" data-line-end="102">https://hub.docker.com/r/phpmyadmin/phpmyadmin/</a><br data-line="102" data-line-end="103">
+Use the above image.</p>
+<h4 id="environment-3" data-line="105" data-line-end="105">environment</h4>
+<p data-line="106" data-line-end="109">You can decide if you want to fix the DB that phpmyadmin connects to.<br data-line="106" data-line-end="107">
+By setting PMA_ARBITARY to 1, you can choose any server when you login.<br data-line="107" data-line-end="108">
+By setting PMA_HOST to any DB, it will be fixed.<br data-line="108" data-line-end="109">
+For details, see <a href="https://hub.docker.com/r/phpmyadmin/phpmyadmin/" data-line="109" data-line-end="109">https://hub.docker.com/r/phpmyadmin/phpmyadmin/</a></p>
+<h4 id="how-to-login" data-line="111" data-line-end="111">How to login</h4>
+<p data-line="112" data-line-end="113">To specify the DB connection destination on the login screen, enter the service name of the DB.<br data-line="112" data-line-end="113">
+The service name will be DNS resolved by the Docker network function.</p>
+<h1 id="dockerfile" data-line="115" data-line-end="115">Dockerfile</h1>
+<h2 id="file-structure" data-line="116" data-line-end="116">File structure</h2>
+<pre data-line="117" data-line-end="123"><code>├─ docker-lamp
+│ ├─ mysql
+│ │└─ Dockerfile
+│└─ php-apache
+│└─ Dockerfile
+</code></pre>
+<h2 id="mysql" data-line="125" data-line-end="125">mysql</h2>
+<h3 id="general_log" data-line="126" data-line-end="126">general_log</h3>
+<p data-line="127" data-line-end="127">If you want to output mysql's general_log to a file from within the container, uncomment the following.</p>
+<pre data-line="128" data-line-end="131"><code>general_log=1\n\ # Note that the log file will be large.
+general_log_file=/var/log/mysql/query.log\n\ # Note that this will increase the size of the log file.
+</code></pre>
+<p data-line="132" data-line-end="133">This setting will be written to /etc/mysql/my.cnf in the container.<br data-line="132" data-line-end="133">
+However, note that the file will be large.</p>
+<p data-line="135" data-line-end="135">If you use the volume option of docker to allow the host to handle the log file, you may need to set 77x in the directory permission. If you don't do this, mysql will fail to write the log file and the container will be down.</p>
+<h1 id="credits" data-line="137" data-line-end="137">Credits</h1>
+<p data-line="138" data-line-end="141"><a href="https://github.com/SteveLTN" data-line="138" data-line-end="138">https-portal by SteveLTN</a><br data-line="138" data-line-end="139">
+<a href="https://hub.docker.com/_/phpmyadmin" data-line="139" data-line-end="139">phpmyadmin by Docker Official Images</a><br data-line="139" data-line-end="140">
+<a href="https://hub.docker.com/_/php" data-line="140" data-line-end="140">php by Docker Official Images</a><br data-line="140" data-line-end="141">
+<a href="https://hub.docker.com/_/mysql" data-line="141" data-line-end="141">mysql by Docker Official Images</a></p></div>
+  </body>
+</html>
