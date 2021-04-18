@@ -58,9 +58,9 @@ services:
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: myrootpassword
-      MYSQL_DATABASE: wordpressdb
-      MYSQL_USER: wordpressuser
-      MYSQL_PASSWORD: wordpresspass
+      #MYSQL_DATABASE: phpapachedbname
+      #MYSQL_USER: phpapachedbuser
+      #MYSQL_PASSWORD: phpapachepassword
     networks:
       - nginx_proxy_net
 
